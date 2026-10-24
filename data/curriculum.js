@@ -1,4 +1,5 @@
 // Konten terkurasi. ID harus tetap stabil karena dipakai oleh kemajuan lokal.
+import { pieceLessons } from './pieces.js';
 export const modules = [
   { id: 'dasar', number: '01', title: 'Kenali papanmu', level: 'Mulai dari nol', icon: '♙', description: 'Kenali arena, buah catur, dan langkah pertamamu.' },
   { id: 'aturan', number: '02', title: 'Pahami permainan', level: 'Dasar', icon: '♔', description: 'Skak, skakmat, dan aturan khusus yang perlu kamu tahu.' },
@@ -18,6 +19,7 @@ export const lessons = [
     'Raja bergerak satu petak ke segala arah, tetapi tidak boleh menuju petak yang diserang lawan. Kamu tidak boleh meninggalkan rajamu sendiri dalam skak.',
     'Pion maju satu petak ke depan dan menangkap satu petak diagonal ke depan. Dari petak awal, pion boleh maju dua petak jika jalurnya kosong. Pion tidak berjalan mundur.'
   ], question: 'Buah mana yang dapat melompati buah lain?', options: ['Gajah', 'Kuda', 'Benteng'], answer: 1, explanation: 'Kuda melompat dengan pola dua petak pada satu arah dan satu petak tegak lurus.' },
+  ...pieceLessons,
   { id: 'skak', module: 'aturan', title: 'Skak, skakmat, dan pat', minutes: 5, exercise: 'mat', paragraphs: [
     'Skak berarti raja sedang diserang. Atasi dengan memindahkan raja, menangkap penyerang, atau menutup jalur serangan jika memungkinkan. Serangan kuda tidak bisa ditutup.',
     'Skakmat terjadi ketika raja diserang dan tidak ada langkah legal untuk menyelamatkannya. Pihak yang memberi skakmat menang.',

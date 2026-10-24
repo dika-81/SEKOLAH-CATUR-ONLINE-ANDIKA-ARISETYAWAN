@@ -1,4 +1,6 @@
+import { pieceExercises } from './pieces.js';
 export const exercises = [
+  ...pieceExercises,
   { id: 'petak', title: 'Temukan a1', theme: 'Koordinat', type: 'square', target: 'a1', fen: 'start', instruction: 'Papan dilihat dari sisi putih. Sentuh petak a1.', hints: ['Huruf menunjukkan kolom, angka menunjukkan baris.', 'Cari sudut kiri bawah papan.'], explanation: 'Benar! a1 adalah petak gelap di sudut kiri bawah dari sisi putih.' },
   { id: 'kuda', title: 'Lompatan pertama', theme: 'Gerak buah', fen: 'start', moves: ['g1f3'], instruction: 'Kembangkan kuda putih dari g1 ke f3.', hints: ['Kuda bergerak membentuk huruf L dan bisa melompati pion.', 'Pilih kuda g1, kemudian petak f3.'], explanation: 'Kuda di f3 ikut mengendalikan pusat, termasuk petak e5 dan d4.' },
   { id: 'benteng', title: 'Jalur lurus', theme: 'Gerak buah', fen: '4k3/8/8/8/8/8/p7/R3K3 w - - 0 1', moves: ['a1a2'], instruction: 'Tangkap pion hitam dengan benteng putih.', hints: ['Benteng bergerak lurus sepanjang kolom atau baris.', 'Pion berada tepat di depan benteng, pada a2.'], explanation: 'Benteng dari a1 menangkap pion di a2. Buah lawan yang ditangkap keluar dari papan.' },

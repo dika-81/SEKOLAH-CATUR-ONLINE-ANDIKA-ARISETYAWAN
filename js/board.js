@@ -3,7 +3,7 @@ import { PIECES } from './game.js';
 const names = { p: 'pion', n: 'kuda', b: 'gajah', r: 'benteng', q: 'menteri', k: 'raja' };
 export function createTrainingBoard(container, exercise, onSolved, onFeedback) {
   const game = exercise.fen === 'start' ? new Chess() : new Chess(exercise.fen);
-  let selected = null;
+  let selected = exercise.startSquare || null;
   let done = false;
   function draw(focusSquare) {
     container.replaceChildren();
@@ -13,7 +13,7 @@ export function createTrainingBoard(container, exercise, onSolved, onFeedback) {
       const button = document.createElement('button');
       button.type = 'button';
       button.dataset.square = square;
-      button.className = `square${(row + col) % 2 ? ' dark' : ''}${selected === square ? ' selected' : ''}${legal.some(m => m.to === square) ? ' target' : ''}`;
+      button.className = `square${(row + col) % 2 ? ' dark' : ''}${selected === square ? ' selected' : ''}${legal.some(m => m.to === square) ? (piece ? ' capture-target' : ' target') : ''}`;
       button.setAttribute('aria-label', `${square}, ${piece ? names[piece.type] + (piece.color === 'w' ? ' putih' : ' hitam') : 'kosong'}`);
       button.setAttribute('aria-pressed', String(selected === square));
       if (piece) {
@@ -60,5 +60,5 @@ export function createTrainingBoard(container, exercise, onSolved, onFeedback) {
     draw(square);
   }
   draw();
-  return { reset() { game.load(exercise.fen === 'start' ? new Chess().fen() : exercise.fen); selected = null; done = false; draw(); } };
+  return { reset() { game.load(exercise.fen === 'start' ? new Chess().fen() : exercise.fen); selected = exercise.startSquare || null; done = false; draw(); } };
 }

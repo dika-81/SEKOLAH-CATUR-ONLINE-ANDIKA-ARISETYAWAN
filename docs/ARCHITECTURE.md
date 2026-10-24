@@ -18,6 +18,7 @@ js/
 data/
   curriculum.js             Tahap, pelajaran, kuis, tautan latihan
   exercises.js              Posisi, tujuan, petunjuk, dan solusi latihan
+  pieces.js                 Profil enam buah; menghasilkan pelajaran dan latihan gerak
 assets/
   vendor/chess.js            Validasi aturan
   engine/                   JavaScript dan WASM Stockfish
@@ -31,6 +32,8 @@ scripts/                    Server lokal dan penyiapan dist
 `#home` → `#learn` → `#learn/<module-id>` → `#lesson/<lesson-id>` → `#practice/<exercise-id>`.
 
 Pelajaran selesai setelah kuis dijawab benar. Latihan selesai setelah sasaran petak atau langkah UCI yang ditentukan tercapai. Penyelesaian tidak dihitung ganda. Penyelesaian materi tidak dikonversi menjadi rating catur.
+
+`#pieces` membuka katalog Kenali Buah. Profil di `data/pieces.js` menghasilkan enam pelajaran ber-ID `kenali-*` dan enam latihan `gerak-*`. Pelajaran ini memiliki papan latihan langsung, nilai relatif, dan penjelasan individual. `startSquare` pada latihan memilih buah awal untuk memperlihatkan tujuan legal; titik menunjukkan tujuan kosong dan lingkaran menunjukkan tangkapan. Nilai raja memakai `null`, bukan nol, karena tidak mempunyai nilai tukar. ID materi lama tetap dipertahankan untuk menjaga kemajuan yang sudah tersimpan.
 
 `#play` dan `#analysis` memuat `game.html` di iframe berjudul. Pemisahan ini mempertahankan komponen dari situs asal dan mencegah engine dimuat pada halaman materi. Perpindahan keluar dari halaman papan menghentikan konteks iframe. Halaman papan juga dapat dibuka sendiri.
 

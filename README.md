@@ -5,8 +5,9 @@ Fondasi sekolah catur berbahasa Indonesia yang berjalan di peramban. Dibangun da
 ## Tersedia pada versi 0.1
 
 - Beranda, Belajar, Latihan, Bermain, Analisis, Kemajuanku, dan Panduan.
-- 12 pelajaran pengantar dalam enam tahap, masing-masing dilengkapi kuis dan tautan latihan.
-- 9 latihan papan terarah dengan validasi chess.js, petunjuk bertahap, dan penjelasan solusi.
+- 18 pelajaran pengantar dalam enam tahap, masing-masing dilengkapi kuis dan tautan latihan.
+- Menu **Kenali Buah**: raja, menteri, benteng, gajah, kuda, dan pion; nilai relatif, posisi awal, gerak, tangkapan, aturan khusus, dan papan latihan langsung di tiap pelajaran.
+- 15 latihan papan terarah dengan validasi chess.js, petunjuk bertahap, dan penjelasan solusi. Papan membedakan tujuan kosong dari petak tangkapan.
 - Bermain sebagai putih melawan Stockfish 18; empat kedalaman pencarian, pilihan tanpa jam atau jam 10 menit, validasi langkah, dan promosi.
 - Papan analisis kedua warna, evaluasi, langkah terbaik, variasi, dan urungkan langkah.
 - Kemajuan dan posisi permainan disimpan di localStorage perangkat pengguna.

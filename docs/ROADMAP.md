@@ -3,13 +3,14 @@
 ## Fondasi tersedia
 
 - Navigasi, tampilan responsif, konten dalam modul data.
-- Materi pengantar enam tahap: 12 pelajaran, 9 latihan papan.
+- Materi pengantar enam tahap: 18 pelajaran, 15 latihan papan.
+- Kenali Buah: enam pelajaran individual, nilai materi, cara bergerak/menangkap, dan latihan papan terintegrasi.
 - Bot dan analisis Stockfish dari situs asal.
 - Kemajuan lokal, ekspor/impor, dan alur GitHub Pages.
 
 ## Berikutnya: pemula yang benar-benar terbimbing
 
-- Pelajaran gerak terpisah untuk setiap buah, susunan papan, dan kuis dengan beberapa posisi baru.
+- Latihan menyusun papan dan kuis dengan beberapa posisi baru untuk setiap buah.
 - Bot dengan perilaku pemula yang dirancang khusus, pilihan warna, dan urungkan langkah di mode belajar.
 - Penjelasan buah diserang/terjaga serta peringatan kehilangan buah yang bisa dinonaktifkan.
 - Sinkronisasi kemajuan antartab dan cadangan posisi permainan.
