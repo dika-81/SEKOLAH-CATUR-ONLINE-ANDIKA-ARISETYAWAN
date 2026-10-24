@@ -2,7 +2,7 @@ import { modules, lessons } from '../data/curriculum.js';
 import { exercises } from '../data/exercises.js';
 import { pieces } from '../data/pieces.js';
 import { createProgressStore, validateProgress } from './progress.js';
-import { createTrainingBoard } from './board.js';
+import { createTrainingBoard, exerciseIcon } from './board.js';
 import { Chess } from '../assets/vendor/chess.js';
 import { PIECES } from './game.js';
 
@@ -87,7 +87,7 @@ function practice(id, theme = 'Semua') {
   if (id && !exercise) return notFound();
   if (!exercise) {
     const themes = ['Semua', ...new Set(exercises.map(e => e.theme))];
-    main.innerHTML = head('RUANG LATIHAN', 'Pemahaman menjadi kebiasaan.', 'Latihan terarah di papan. Pilih tema, coba sendiri, dan buka petunjuk ketika dibutuhkan.') + `<div class="filters" aria-label="Tema latihan">${themes.map(t => `<button class="filter" data-theme="${t}" aria-pressed="${theme === t}">${t}</button>`).join('')}</div><div class="grid">${exercises.filter(e => theme === 'Semua' || e.theme === theme).map((e, i) => `<a class="card" href="#practice/${e.id}"><div class="card-top"><span class="module-icon" aria-hidden="true">${['♘', '♖', '♗'][i % 3]}</span><span class="tag">${e.theme}</span></div><h3>${e.title}</h3><p>${e.instruction}</p><small>${progress.get().exercises.includes(e.id) ? 'Sudah diselesaikan ✓' : 'Mulai latihan →'}</small></a>`).join('')}</div>`;
+    main.innerHTML = head('RUANG LATIHAN', 'Pemahaman menjadi kebiasaan.', 'Latihan terarah di papan. Pilih tema, coba sendiri, dan buka petunjuk ketika dibutuhkan.') + `<div class="filters" aria-label="Tema latihan">${themes.map(t => `<button class="filter" data-theme="${t}" aria-pressed="${theme === t}">${t}</button>`).join('')}</div><div class="grid">${exercises.filter(e => theme === 'Semua' || e.theme === theme).map(e => `<a class="card" href="#practice/${e.id}"><div class="card-top"><span class="module-icon" aria-hidden="true">${exerciseIcon(e)}</span><span class="tag">${e.theme}</span></div><h3>${e.title}</h3><p>${e.instruction}</p><small>${progress.get().exercises.includes(e.id) ? 'Sudah diselesaikan ✓' : 'Mulai latihan →'}</small></a>`).join('')}</div>`;
     document.querySelectorAll('[data-theme]').forEach(el => el.addEventListener('click', () => practice(null, el.dataset.theme))); return;
   }
   const next = exercises[(exercises.indexOf(exercise) + 1) % exercises.length];

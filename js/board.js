@@ -1,6 +1,15 @@
 import { Chess } from '../assets/vendor/chess.js';
 import { PIECES } from './game.js';
 const names = { p: 'pion', n: 'kuda', b: 'gajah', r: 'benteng', q: 'menteri', k: 'raja' };
+export function exerciseIcon(exercise) {
+  if (exercise.type === 'square') return '▦';
+  const from = exercise.moves?.[0]?.slice(0, 2);
+  if (!from) return '◇';
+  const position = exercise.fen === 'start' ? new Chess() : new Chess(exercise.fen);
+  const piece = position.get(from);
+  return piece ? PIECES[piece.color + piece.type] : '◇';
+}
+
 export function createTrainingBoard(container, exercise, onSolved, onFeedback) {
   const game = exercise.fen === 'start' ? new Chess() : new Chess(exercise.fen);
   let selected = exercise.startSquare || null;
