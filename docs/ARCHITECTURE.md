@@ -11,6 +11,8 @@ css/
 js/
   school.js                 Router hash dan halaman sekolah
   board.js                  Papan interaktif untuk latihan terarah
+  mate-three.js             Model kuis, pemilihan pertahanan, dan pengacak tanpa pengulangan
+  mate-quiz.js              Antarmuka kuis mat tiga langkah
   progress.js               Validasi, simpan, impor, dan reset kemajuan
   play.js                   Interaksi permainan dan analisis
   game.js                   Model aturan permainan
@@ -19,6 +21,7 @@ data/
   curriculum.js             Tahap, pelajaran, kuis, tautan latihan
   exercises.js              Posisi, tujuan, petunjuk, dan solusi latihan
   pieces.js                 Profil enam buah; menghasilkan pelajaran dan latihan gerak
+  mate-three.js             36 posisi beserta pohon solusi semua pertahanan
 assets/
   vendor/chess.js            Validasi aturan
   engine/                   JavaScript dan WASM Stockfish
@@ -44,6 +47,18 @@ Tambahkan objek pelajaran pada `data/curriculum.js`, gunakan ID unik yang stabil
 Tambahkan latihan pada `data/exercises.js`. `fen: 'start'` berarti posisi awal. Untuk latihan langkah gunakan FEN legal dan daftar solusi UCI pada `moves`. Versi awal hanya menangani satu langkah pengguna; promosi latihan otomatis menjadi menteri. Untuk latihan petak gunakan `type: 'square'` dan `target`.
 
 Jalankan `npm test`; semua posisi dan solusi diperiksa dengan chess.js. Tinjau alasan pengajaran secara manual, karena legalitas langkah saja tidak membuktikan kualitas materi.
+
+## Kuis mat tiga langkah
+
+Rute `#mate3` tersedia di navigasi, beranda, dan Latihan. Kuis berisi 36 posisi akhir permainan: raja–menteri, raja–benteng, dua benteng, menteri–kuda, benteng–gajah, dan dua gajah. Putih memainkan tiga langkah dan hitam membalas dua kali. `drawPositionBoard` dipakai bersama dengan latihan lama, sehingga penanda tujuan dan akses keyboard tetap konsisten.
+
+`data/mate-three.js` menyimpan pohon pembuktian, bukan satu jalur contoh. Pada giliran putih, semua langkah yang tetap memaksa mat dalam sisa batas langkah disimpan. Pada giliran hitam, semua balasan legal disimpan. `plies` menyatakan jarak mat dengan putih mempercepat dan hitam menunda. Antarmuka memilih pertahanan dengan jarak terpanjang; langkah salah ditolak tanpa mengubah posisi. Tidak ada unduhan mesin atau pencarian mahal saat bermain kuis.
+
+Bank dibuat secara deterministik dengan `python scripts/generate-mate-three.py` (alat pengembangan opsional, memerlukan `python-chess` 1.999 / modul chess 1.11.2). Skrip mencoba posisi legal lalu melakukan pencarian semua langkah hingga lima ply. Posisi yang memiliki mat paksa dalam tiga ply ditolak. Regenerasi dapat memerlukan beberapa menit; jangan mengubah ID atau seed bank yang sudah diterbitkan tanpa mempertimbangkan kemajuan pengguna. Berkas hasil sudah disertakan sehingga Python tidak diperlukan untuk menjalankan situs, npm test, build, atau deployment.
+
+Pengujian memakai chess.js secara independen untuk memeriksa setiap cabang solusi, kelengkapan semua balasan hitam, skakmat pada setiap daun, dan tidak adanya mat yang lebih cepat. Pemilih soal menggunakan pengacakan satu putaran penuh serta mencegah pengulangan langsung pada pergantian putaran. Putaran diingat selama tab aktif; pemuatan ulang memulai putaran baru.
+
+Penyelesaian kuis menggunakan ID `mat3-*` dalam daftar `exercises` yang sudah ada. Halaman Kemajuanku menghitung kuis terpisah dari latihan lama, dan filter impor mengenali kedua jenis ID. Format cadangan versi 1 tetap kompatibel.
 
 ## Penyimpanan dan batas
 

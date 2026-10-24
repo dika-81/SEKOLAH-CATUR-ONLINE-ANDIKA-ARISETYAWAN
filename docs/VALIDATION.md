@@ -2,6 +2,17 @@
 
 Dilakukan pada 24 Oktober 2026 dengan Node.js 24.
 
+## Pembaruan Kuis Mat 3 Langkah
+
+- `npm.cmd test`: **28 pengujian lulus**, termasuk 36 posisi unik dari enam tema, semua pertahanan hitam legal pada pohon solusi, serta tidak adanya mat paksa yang lebih cepat dari tiga langkah.
+- Semua alternatif langkah pertama dalam bank diterima, hitam bertahan sampai langkah putih ketiga, dan papan terkunci setelah skakmat. Langkah salah tidak mengubah posisi; ulangi mengembalikan posisi awal.
+- Pengacakan diuji selama empat putaran dengan tiga sumber acak deterministik: tidak ada pengulangan dalam putaran atau pada batas dua putaran.
+- Kemajuan kuis diuji setelah reload, ekspor–impor, dan penyelesaian berulang.
+- `npm.cmd run build` berhasil. Modul kuis dan bank soal ikut dalam `dist/`; pemeriksaan aset relatif/subpath lulus.
+- Pemeriksaan visual/interaksi langsung belum berhasil: alat browser mengalami timeout saat membuka tab lokal, lalu gagal dengan `Debugger unattached`. Server lokal mengembalikan HTTP 200. Hasil tes otomatis tidak menggantikan pemeriksaan visual desktop/ponsel.
+
+## Pemeriksaan fondasi
+
 - `npm test`: aturan permainan, solusi latihan, kemajuan/cadangan, URL aset relatif, serta eksekusi Stockfish WebAssembly dalam Worker.
 - `npm run build`: penyalinan aset publik ke `dist/`.
 - `node --check` untuk modul antarmuka.

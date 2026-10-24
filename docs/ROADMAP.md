@@ -5,6 +5,7 @@
 - Navigasi, tampilan responsif, konten dalam modul data.
 - Materi pengantar enam tahap: 18 pelajaran, 15 latihan papan.
 - Kenali Buah: enam pelajaran individual, nilai materi, cara bergerak/menangkap, dan latihan papan terintegrasi.
+- Kuis Mat 3 Langkah: 36 posisi, enam kombinasi buah, semua pertahanan tervalidasi, solusi alternatif, petunjuk, dan pengacakan tanpa pengulangan.
 - Bot dan analisis Stockfish dari situs asal.
 - Kemajuan lokal, ekspor/impor, dan alur GitHub Pages.
 
@@ -17,7 +18,7 @@
 
 ## Berikutnya: latihan bertingkat
 
-- Puzzle beberapa langkah dengan jawaban lawan, beberapa solusi sah, dan tingkat kesulitan.
+- Perluasan kuis beberapa langkah ke motif taktis lain dan tingkat kesulitan bertahap.
 - Bank soal terkurasi: ikatan, tusuk sate, serangan terbuka, pertahanan, pola mat.
 - Ujian posisi baru dan rekomendasi berdasarkan kesalahan, seluruhnya di perangkat.
 

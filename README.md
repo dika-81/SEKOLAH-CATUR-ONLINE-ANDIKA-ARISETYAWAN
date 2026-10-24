@@ -8,6 +8,7 @@ Fondasi sekolah catur berbahasa Indonesia yang berjalan di peramban. Dibangun da
 - 18 pelajaran pengantar dalam enam tahap, masing-masing dilengkapi kuis dan tautan latihan.
 - Menu **Kenali Buah**: raja, menteri, benteng, gajah, kuda, dan pion; nilai relatif, posisi awal, gerak, tangkapan, aturan khusus, dan papan latihan langsung di tiap pelajaran.
 - 15 latihan papan terarah dengan validasi chess.js, petunjuk bertahap, dan penjelasan solusi. Papan membedakan tujuan kosong dari petak tangkapan.
+- **Kuis Mat 3 Langkah** (`#mate3`): 36 posisi dalam enam kombinasi buah, balasan hitam otomatis, solusi alternatif, petunjuk bertahap, contoh solusi, dan tombol **Acak Tantangan** tanpa pengulangan sampai satu putaran selesai. Kemajuan ikut dalam ekspor–impor latihan.
 - Bermain sebagai putih melawan Stockfish 18; empat kedalaman pencarian, pilihan tanpa jam atau jam 10 menit, validasi langkah, dan promosi.
 - Papan analisis kedua warna, evaluasi, langkah terbaik, variasi, dan urungkan langkah.
 - Kemajuan dan posisi permainan disimpan di localStorage perangkat pengguna.
@@ -33,6 +34,10 @@ npm run build
 
 Hasil build berada dalam `dist/`. Pengujian meliputi aturan catur, solusi latihan, struktur kurikulum, cadangan kemajuan, serta eksekusi Stockfish WASM dalam Worker.
 
+Pada PowerShell yang memblokir `npm.ps1`, gunakan `npm.cmd test`, `npm.cmd start`, dan `npm.cmd run build`.
+
+Bank kuis mat diverifikasi terhadap semua pertahanan legal, termasuk langkah tanpa skak. Pengujian chess.js juga memastikan setiap posisi tidak mempunyai mat paksa dalam satu atau dua langkah. Lihat [arsitektur kuis](docs/ARCHITECTURE.md) untuk regenerasi bank soal.
+
 ## GitHub Pages
 
 Workflow [pages.yml](.github/workflows/pages.yml) menguji, menyiapkan `dist/`, dan menerbitkan setiap push ke `main`.
@@ -42,7 +47,7 @@ Workflow [pages.yml](.github/workflows/pages.yml) menguji, menyiapkan `dist/`, d
 3. Jalankan ulang workflow **Test and deploy GitHub Pages** jika push pertama terjadi sebelum Pages diaktifkan.
 
 Alamat yang dituju setelah deployment berhasil:
-`https://dika-81.github.io/SEKOLAH-CATUR-ONLINE-ANDIKA-ARISETYAWAN/`
+`https://andikaarisetyawan.com/SEKOLAH-CATUR-ONLINE-ANDIKA-ARISETYAWAN/`
 
 Seluruh aset memakai path relatif; navigasi memakai hash agar tidak memerlukan fallback server. Lihat [dokumentasi workflow GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages).
 

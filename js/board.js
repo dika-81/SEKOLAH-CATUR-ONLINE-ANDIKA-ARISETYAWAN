@@ -10,40 +10,42 @@ export function exerciseIcon(exercise) {
   return piece ? PIECES[piece.color + piece.type] : '◇';
 }
 
+export function drawPositionBoard(container, game, selected, choose, focusSquare) {
+  container.replaceChildren();
+  const legal = selected ? game.moves({ square: selected, verbose: true }) : [];
+  game.board().forEach((rank, row) => rank.forEach((piece, col) => {
+    const square = 'abcdefgh'[col] + (8 - row);
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.dataset.square = square;
+    button.className = `square${(row + col) % 2 ? ' dark' : ''}${selected === square ? ' selected' : ''}${legal.some(m => m.to === square) ? (piece ? ' capture-target' : ' target') : ''}`;
+    button.setAttribute('aria-label', `${square}, ${piece ? names[piece.type] + (piece.color === 'w' ? ' putih' : ' hitam') : 'kosong'}`);
+    button.setAttribute('aria-pressed', String(selected === square));
+    if (piece) {
+      const glyph = document.createElement('span');
+      glyph.className = `piece ${piece.color === 'w' ? 'white' : ''}`;
+      glyph.textContent = PIECES[piece.color + piece.type];
+      glyph.setAttribute('aria-hidden', 'true');
+      button.append(glyph);
+    }
+    if (col === 0 || row === 7) {
+      const coordinate = document.createElement('span');
+      coordinate.className = 'coord';
+      coordinate.textContent = square;
+      coordinate.setAttribute('aria-hidden', 'true');
+      button.append(coordinate);
+    }
+    button.addEventListener('click', () => choose(square));
+    container.append(button);
+  }));
+  if (focusSquare) container.querySelector(`[data-square="${focusSquare}"]`)?.focus({ preventScroll: true });
+}
+
 export function createTrainingBoard(container, exercise, onSolved, onFeedback) {
   const game = exercise.fen === 'start' ? new Chess() : new Chess(exercise.fen);
   let selected = exercise.startSquare || null;
   let done = false;
-  function draw(focusSquare) {
-    container.replaceChildren();
-    const legal = selected ? game.moves({ square: selected, verbose: true }) : [];
-    game.board().forEach((rank, row) => rank.forEach((piece, col) => {
-      const square = 'abcdefgh'[col] + (8 - row);
-      const button = document.createElement('button');
-      button.type = 'button';
-      button.dataset.square = square;
-      button.className = `square${(row + col) % 2 ? ' dark' : ''}${selected === square ? ' selected' : ''}${legal.some(m => m.to === square) ? (piece ? ' capture-target' : ' target') : ''}`;
-      button.setAttribute('aria-label', `${square}, ${piece ? names[piece.type] + (piece.color === 'w' ? ' putih' : ' hitam') : 'kosong'}`);
-      button.setAttribute('aria-pressed', String(selected === square));
-      if (piece) {
-        const glyph = document.createElement('span');
-        glyph.className = `piece ${piece.color === 'w' ? 'white' : ''}`;
-        glyph.textContent = PIECES[piece.color + piece.type];
-        glyph.setAttribute('aria-hidden', 'true');
-        button.append(glyph);
-      }
-      if (col === 0 || row === 7) {
-        const coordinate = document.createElement('span');
-        coordinate.className = 'coord';
-        coordinate.textContent = square;
-        coordinate.setAttribute('aria-hidden', 'true');
-        button.append(coordinate);
-      }
-      button.addEventListener('click', () => choose(square));
-      container.append(button);
-    }));
-    if (focusSquare) container.querySelector(`[data-square="${focusSquare}"]`)?.focus({ preventScroll: true });
-  }
+  function draw(focusSquare) { drawPositionBoard(container, game, selected, choose, focusSquare); }
   function choose(square) {
     if (done) return;
     if (exercise.type === 'square') {
