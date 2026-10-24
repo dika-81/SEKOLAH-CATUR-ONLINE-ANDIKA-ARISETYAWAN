@@ -1,0 +1,12 @@
+{
+  "name": "sekolah-catur-online-andika-arisetyawan",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Sekolah catur statis dengan kemajuan di perangkat pengguna.",
+  "scripts": {
+    "start": "node scripts/serve.mjs",
+    "test": "node --test --test-isolation=none tests/*.test.mjs",
+    "build": "node scripts/build.mjs"
+  }
+}
